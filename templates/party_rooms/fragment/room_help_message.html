@@ -1,0 +1,40 @@
+<div>
+    <h3>Об использовании комнат:</h3>
+    <p>После перехода на одну из вкладок комнаты вы сможете выразить своё мнение по поводу предстоящей встречи.</p>
+    <p>Это можно сделать 2 способами:</p>
+    <p>1. Предложить свой вариант времени или места</p>
+    <p>2. Оценить уже предложенный вариант</p>
+    <p>Критерии оценивания:</p>
+    <div>
+        <p><button class="btn btn-default help-icon" data-hover="btn-success">
+            <i class="fa fa-check-circle"></i>
+        </button> Смогу присутствовать</p>
+        <p><button class="btn btn-default help-icon" data-hover="btn-primary">
+            <i class="fa fa-question-circle"></i>
+        </button> Возможно, смогу присутствовать</p>
+        <p><button class="btn btn-default help-icon" data-hover="btn-danger">
+            <i class="fa fa-times-circle"></i>
+        </button> Не смогу присутствовать</p>
+        <p><button class="btn btn-default help-icon" data-hover="btn-success">
+            <i class="fa fa-frown-o"></i>
+        </button> Идея нравится</p>
+        <p><button class="btn btn-default help-icon" data-hover="btn-primary">
+            <i class="fa fa-meh-o"></i>
+        </button> Нейтрально отношусь</p>
+        <p><button class="btn btn-default help-icon" data-hover="btn-danger">
+            <i class="fa fa-frown-o"></i>
+        </button> Идея не нравится</p>
+    </div>
+</div>
+<script>
+    $(".help-icon").hover(
+        function () {
+            $(this).removeClass("btn-default");
+            $(this).addClass($(this).data("hover"));
+        },
+        function () {
+            $(this).removeClass($(this).data("hover"));
+            $(this).addClass("btn-default");
+        }
+    );
+</script>

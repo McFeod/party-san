@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/one_room.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3>Профиль</h3>
+        <div class="col-xs-8 col-xs-offst-2">
+        {% if saved %}
+            <p class="text-success">Изменения сохранены</p>
+        {%  endif %}
+
+            <form action="{% url 'party:profile' %}" method="POST" class="form">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+
+                <a href="{% url 'party:start_page' %}" class="btn btn-default">На главную</a>
+                <a href="{% url 'password_change' %}" class="btn btn-default">
+                    Сменить пароль <i class="fa fa-lock"></i></a>
+                <input type="submit" value="Сохранить изменения" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<div class="row entry">
+    <div class="btn btn-default entry_description_short col-xs-9">
+            <p class="text-left">
+                {{ option.description|default:'не задано' }}
+            </p>
+            <i class="fa fa-angle-down spoiler" onclick="description_click(this.closest('div'))"></i>
+        {% if is_admin or option.author_id == request.user.pk %}
+            <div class="admin_options">
+                <button class="admin_option edit_option" onclick="edit_option_dialog({{ option.pk }}, this)"><i class="fa fa-edit fa-align-center"></i></button>
+                <button class="admin_option remove_option" onclick="remove_option_dialog({{ option.pk }}, this)"><i class="fa fa-trash fa-align-center"></i></button>
+            </div>
+        {% endif %}
+    </div>
+    <div class="choices col-xs-3">
+        <div class="btn-group btn-group-lg" role="group" data-selected="{{ choice.possibility|default:'0' }}" data-type="possibility" data-id="{{ option.pk }}">
+            <button type="button" class="btn" onclick="choice_click(this, 1)" title="Не смогу прийти"><i class="fa fa-times-circle"></i></button>
+            <button type="button" class="btn" onclick="choice_click(this, 2)" title="Возможно, смогу прийти"><i class="fa fa-question-circle"></i></button>
+            <button type="button" class="btn" onclick="choice_click(this, 3)" title="Смогу прийти"><i class="fa fa-check-circle"></i></button>
+        </div>
+        <br>
+        <div class="btn-group btn-group-lg" role="group" data-selected="{{ choice.rating|default:'0' }}" data-type="rating" data-id="{{ option.pk }}">
+            <button type="button" class="btn" onclick="choice_click(this, 1)" title="Идея не нравится"><i class="fa fa-frown-o"></i></button>
+            <button type="button" class="btn" onclick="choice_click(this, 2)" title="Нейтрально отношусь"><i class="fa fa-meh-o"></i></button>
+            <button type="button" class="btn" onclick="choice_click(this, 3)"  title="Отличная идея!"><i class="fa fa-smile-o"></i></button>
+        </div>
+    </div>
+</div>

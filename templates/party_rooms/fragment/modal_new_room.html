@@ -1,0 +1,22 @@
+{% extends 'party_rooms/fragment/modal_base.html' %}
+{% block modal_id %}new_room_modal{% endblock %}
+
+{% block modal_title %}
+    Создание новой комнаты
+{% endblock %}
+
+{% block modal_content %}
+    <form action="{% url 'party:add_room' %}" method="post" id="new_room_form">
+        {% csrf_token %}
+        <p>Задайте пароль для новых участников</p>
+        <input type="password" name="password" placeholder="пароль" id="passw1">
+        <input type="password" placeholder="повторите пароль" id="passw2">
+        <p>и описание комнаты:</p>
+        <textarea name="description" class="form_description"></textarea>
+    </form>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    <button type="button" class="btn btn-primary" onclick="make_room()">Сохранить изменения</button>
+{% endblock %}

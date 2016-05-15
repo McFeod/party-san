@@ -1,0 +1,36 @@
+.tiny_nav{
+    display: inline-block;
+    width: 100px;
+    float: right;
+}
+
+#menu_icon{
+    margin-top: -10px;
+    margin-right: 10px;
+    width: 100px;
+}
+
+.drop {
+    font-size: large;
+    min-width: 190px;
+    padding-left: 5%;
+}
+
+.form_description{
+    width: 100%;
+}
+
+.error::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #a94442;
+}
+.error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #a94442;
+   opacity: 1;
+}
+.error::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #a94442;
+   opacity: 1;
+}
+.error:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #a94442;
+}

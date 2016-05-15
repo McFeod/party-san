@@ -1,0 +1,31 @@
+{% extends "party_rooms/room_generic.html" %}
+{% load staticfiles %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'bower_components/bootstrap-select/dist/css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/one_room.css' %}">
+{% endblock %}
+{% block modal %}
+    {% include "party_rooms/fragment/modal_change_description.html" %}
+    {% include "party_rooms/fragment/modal_invite_user.html" %}
+    {% include "party_rooms/fragment/modal_change_password.html" %}
+{% endblock %}
+
+{% block special %}
+    <div class="container">
+        <h3>Настройки комнаты</h3>
+        <div class="settings">
+            <p><a href="#change_description_modal" data-toggle="modal"><i class="fa fa-edit"></i> Изменить описание</a></p>
+            <p><a href="#change_password_modal" data-toggle="modal"><i class="fa fa-lock"></i> Изменить пароль</a></p>
+            <p><a href="#invite_user_modal" data-toggle="modal"><i class="fa fa-users"></i> Пригласить пользователей</a></p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <script src="{% static 'bower_components/bootstrap-select/dist/js/bootstrap-select.js' %}"></script>
+    <script>
+        reset_submit('#change_description_form');
+        reset_submit('#change_password_form');
+    </script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'party_rooms/room_generic.html' %}
+{% load staticfiles %}
+
+{% block special %}
+    <br>
+    <a class="btn btn-success add_entry" href="#new_place_modal" data-toggle="modal">
+        <i class="fa fa-plus-circle"></i> Предложить место
+    </a>
+    <div id="options">
+        {% for option, choice in options %}
+            {% include 'party_rooms/fragment/opinion_widget.html' %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block global_vars %}
+    <script>
+        var ANSWER_URL = "{% url 'party:add_place_answer' room.pk %}";
+        var TYPE = "place";
+        var USER_ID = {{ request.user.pk }};
+        var IS_ADMIN = false;
+        {% if is_admin %}
+            IS_ADMIN = true;
+        {% endif %}
+    </script>
+{% endblock %}
+
+{% block ws_script %}
+    <script>
+        ws_init({
+            "chat_for_{{ room.pk }}": dummy,
+            "place_for_{{ room.pk }}": handle_scenario
+        }, {{ room.pk }}, "place");
+    </script>
+{% endblock %}
+
+{% block extra_script %}
+    <script>
+        $('#place_button').addClass('btn-primary');
+        reset_submit('#new_place_form');
+        reset_submit('#delete_form');
+        reset_submit('#edit_form');
+    </script>
+{% endblock %}
+
+{% block modal %}
+    {% include 'party_rooms/fragment/modal_add_place.html' %}
+    {% include 'party_rooms/fragment/modal_delete_scenario.html' %}
+    {% include 'party_rooms/fragment/modal_edit_scenario.html' %}
+{% endblock %}

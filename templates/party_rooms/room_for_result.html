@@ -1,0 +1,35 @@
+{% extends 'party_rooms/room_generic.html' %}
+{% load staticfiles %}
+
+{% block special %}
+    <h1 class="text-center" id="loading"><i class="fa fa-spinner loading"></i></h1>
+    <div class="row hidden" id="result_table">
+        <table class="table table-condensed" id="result_table">
+            <thead>
+                <tr>
+                    <th>Место</th>
+                    <th>Время</th>
+                    <th>Возможные участники</th>
+                    <th>Рейтинг</th>
+                </tr>
+            </thead>
+            <tbody id="result_content">
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block extra_script %}
+    <script src='{% static "js/result.js" %}'></script>
+    <script>
+        $('#result_button').addClass('btn-primary');
+        $.ajax({
+            url: '{% url "party:send_results" room.pk %}',
+            data: {
+                room: {{ room.pk }}
+            },
+            success: load_results
+        });
+    </script>
+{% endblock %}

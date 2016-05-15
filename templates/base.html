@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    {% block style %}{% endblock %}
+</head>
+<body>
+{% block navbar %}
+<nav class="navbar tiny_nav">
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="{% static 'img/menu.svg' %}" alt="" id="menu_icon">
+            </a>
+            <ul class="dropdown-menu drop">
+                <li><a href="{% url 'party:profile' %}">Профиль</a></li>
+                <li><a href="{% url 'party:help' %}">Справка</a></li>
+                <li><a href="{% url 'party:logout' %}">Выход</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
+</body>
+<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+{% block script %}{% endblock %}
+</html>

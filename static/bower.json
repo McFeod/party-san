@@ -1,0 +1,27 @@
+{
+  "name": "party-san",
+  "authors": [
+    "McFeod <mcfeod@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.5.0",
+    "sockjs-client": "~1.0.3",
+    "jasny-bootstrap": "~3.1.3",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.37",
+    "bootstrap-select": "^1.10.0"
+  }
+}

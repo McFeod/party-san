@@ -1,0 +1,23 @@
+{% extends 'party_rooms/fragment/modal_base.html' %}
+{% block modal_id %}invite_user_modal{% endblock %}
+
+{% block modal_title %}
+    Пригласить пользоватей из других комнат
+{% endblock %}
+
+{% block modal_content %}
+    <form action="{% url 'party:add_users' room.pk %}" method="post" id="invite_user_form">
+        {% csrf_token %}
+        <select name="users" class="selectpicker" multiple data-width="fit"
+                data-live-search="true" title="Выберите одного или нескольких пользователей">
+            {% for user in possible_users %}
+            <option data-content="{{ user.get_full_name|default:user.username }}">{{ user.pk }}</option>
+            {% endfor %}
+        </select>
+    </form>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    <button type="button" class="btn btn-primary" onclick="add_from_modal('#invite_user_form')">Сохранить изменения</button>
+{% endblock %}

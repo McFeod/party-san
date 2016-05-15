@@ -1,0 +1,63 @@
+{% extends 'party_rooms/room_generic.html' %}
+{% load staticfiles %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/one_room.css' %}">
+{% endblock %}
+
+{% block special %}
+    <br>
+    <a class="btn btn-success add_entry" href="#new_time_modal" data-toggle="modal">
+        <i class="fa fa-plus-circle"></i> Предложить время
+    </a>
+    <div id="options">
+        {% for option, choice in options %}
+            {% include 'party_rooms/fragment/opinion_widget.html' %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block ws_script %}
+    <script>
+        ws_init({
+            "chat_for_{{ room.pk }}": dummy,
+            "time_for_{{ room.pk }}": handle_scenario
+        }, {{ room.pk }}, "time");
+    </script>
+{% endblock %}
+
+{% block extra_script %}
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static 'bower_components/moment/min/moment-with-locales.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+    <script>
+        $('#time_button').addClass('btn-primary');
+        reset_submit('#new_time_form');
+        reset_submit('#delete_form');
+        reset_submit('#edit_form');
+        $('#dtpicker').datetimepicker({
+            locale: 'ru'
+        });
+        // todo ws
+    </script>
+{% endblock %}
+
+{% block modal %}
+    {% include 'party_rooms/fragment/modal_add_time.html' %}
+    {% include 'party_rooms/fragment/modal_delete_scenario.html' %}
+    {% include 'party_rooms/fragment/modal_edit_scenario.html' %}
+{% endblock %}
+
+{% block global_vars %}
+    <script>
+        var ANSWER_URL = "{% url 'party:add_time_answer' room.pk %}";
+        var TYPE = "time";
+        var USER_ID = {{ request.user.pk }};
+        var IS_ADMIN = false;
+        {% if is_admin %}
+            IS_ADMIN = true;
+        {% endif %}
+    </script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'party_rooms/fragment/modal_base.html' %}
+{% block modal_id %}delete_scenario_modal{% endblock %}
+
+{% block modal_title %}
+    Подтвердите удаление
+{% endblock %}
+
+{% block modal_content %}
+    <form action="{% url 'party:delete_scenario' room.pk %}" method="post" id="delete_form">
+        {% csrf_token %}
+        <p></p>
+        <input type="text" name="option_id" class="hidden">
+        <input type="text" name="option_type" class="hidden">
+    </form>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    <button type="button" class="btn btn-danger" onclick="add_from_modal('#delete_form')">Удалить</button>
+{% endblock %}

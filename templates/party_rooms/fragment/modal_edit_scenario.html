@@ -1,0 +1,21 @@
+{% extends 'party_rooms/fragment/modal_base.html' %}
+{% block modal_id %}edit_scenario_modal{% endblock %}
+
+{% block modal_title %}
+    Внесение изменений
+{% endblock %}
+
+{% block modal_content %}
+    <form action="{% url 'party:edit_scenario' room.pk %}" method="post" id="edit_form">
+        {% csrf_token %}
+        <p></p>
+        <textarea class="form_description" name="description"></textarea>
+        <input type="text" name="option_id" class="hidden">
+        <input type="text" name="option_type" class="hidden">
+    </form>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    <button type="button" class="btn btn-primary" onclick="add_from_modal('#edit_form', empty_description)">Сохранить</button>
+{% endblock %}

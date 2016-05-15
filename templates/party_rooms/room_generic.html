@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/one_room.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% block modal %}{% endblock %}
+    {% if request.user in room.room_users.all %}
+<div class="container">
+    <h1>
+        <a href="{% url 'party:room' room.pk %}" class="link">Комната № {{ room.pk }}</a>
+        {% if is_admin %}
+            <a href="{% url "party:settings_room" room.pk %}" title="настройки комнаты">
+                <i class="fa fa-gear weak"></i>
+            </a>
+        {% endif %}
+    </h1>
+
+    <div>
+        <div class="col-md-2">
+            <h3>пользователи</h3>
+            <div class="container">
+            {% for room_user in room.room_users.all %}
+                <p>{{ room_user.get_full_name|default:room_user.username }}</p>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-7">
+            <br>
+            <div class="btn-group btn-group-lg" role="group">
+                <a class="btn btn-default" href="{% url 'party:place_room' room.pk %}" id="place_button">
+                    <i class="fa fa-map-signs"></i> выбор места</a>
+                <a class="btn btn-default" href="{% url 'party:time_room' room.pk %}" id="time_button">
+                    <i class="fa fa-clock-o"></i> выбор времени</a>
+                <a class="btn btn-default" href="{% url 'party:result_room' room.pk %}" id="result_button">
+                    <i class="fa fa-bar-chart"></i> результаты</a>
+                <a class="btn btn-default" href="{% url 'party:start_page' %}" id="leave_button">
+                    <i class="fa fa-sign-out"></i> выход</a>
+            </div>
+            {% block special %}
+                {% include 'party_rooms/fragment/room_help_message.html' %}
+            {% endblock %}
+        </div>
+        <div class="col-md-3">
+{#            <h3>чат</h3>#}
+{#            [в разработке]#}
+        </div>
+    </div>
+</div>
+    {% else %}
+        Как Вы сюда попали?
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/ws.js' %}"></script>
+
+    {% block global_vars %}{% endblock %}
+    <script src="{% static 'js/room.js' %}"></script>
+
+    {% block ws_script %}
+        <script>
+            ws_init({
+                "chat_for_{{ room.pk }}": dummy
+            }, {{ room.pk }}, "");
+        </script>
+    {% endblock %}
+    {% block extra_script %}
+    {% endblock %}
+{% endblock %}

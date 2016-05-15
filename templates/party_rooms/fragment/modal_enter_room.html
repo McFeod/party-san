@@ -1,0 +1,20 @@
+{% extends 'party_rooms/fragment/modal_base.html' %}
+{% block modal_id %}enter_room_modal{% endblock %}
+
+{% block modal_title %}
+Вход в комнату
+{% endblock %}
+
+{% block modal_content %}
+    <form method="post" id="enter_room_form">
+        {% csrf_token %}
+        <p>Введите номер комнаты и пароль, который Вам сообщили при приглашении</p>
+        <input type="text" placeholder="Номер комнаты" id="enter_room_number">
+        <input type="password" placeholder="Пароль" name="password" id="room_password">
+    </form>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    <button type="button" class="btn btn-primary" onclick="enter_room()">Вход</button>
+{% endblock %}

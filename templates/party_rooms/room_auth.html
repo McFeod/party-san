@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block style %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+
+<div id="content" class="container">
+    <div id="login_container">
+        <h3>Комната № {{ room.pk }}</h3>
+        <h4>Для первого входа в комнату необходим пароль.</h4>
+        <h4>Его должен был сообщить пригласивший Вас человек.</h4>
+        <form action="{% url 'party:enter_room' room.pk %}" method="post" accept-charset="utf-8" class="form-horizontal">
+            {% csrf_token %}
+            <div class="control-group">
+                <label class="control-label col-xs-3" for="password">Пароль:</label>
+                <div class="col-xs-9">
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
+            </div>
+            <br><br>
+            <div class="control-group col-xs-offset-3 col-xs-9">
+                <input type="submit" class="btn btn-primary" value="Войти">
+                <a href="{% url 'party:start_page' %}" class="btn btn-default">На главную</a>
+            </div>
+        </form>
+
+    </div>
+
+    <div id="logo">
+        <img src="{% static 'img/logo.svg' %}" alt="">
+    </div>
+</div>
+
+{% endblock %}

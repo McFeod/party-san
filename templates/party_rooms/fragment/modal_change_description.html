@@ -1,0 +1,18 @@
+{% extends 'party_rooms/fragment/modal_base.html' %}
+{% block modal_id %}change_description_modal{% endblock %}
+
+{% block modal_title %}
+    Изменить описание комнаты
+{% endblock %}
+
+{% block modal_content %}
+    <form action="{% url 'party:change_description' room.pk %}" method="post" id="change_description_form">
+        {% csrf_token %}
+        <textarea name="description" class="form_description">{{ room.description }}</textarea>
+    </form>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    <button type="button" class="btn btn-primary" onclick="change_from_modal('#change_description_form')">Сохранить изменения</button>
+{% endblock %}

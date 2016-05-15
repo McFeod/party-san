@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/rooms.css' %}">
+{% endblock %}
+
+{%  block content %}
+{% include 'party_rooms/fragment/modal_new_room.html' %}
+{% include 'party_rooms/fragment/modal_enter_room.html' %}
+
+    <div class="container">
+        <h1>Комнаты</h1>
+        <div class="btn-group btn-group-lg" role="group">
+            <a class="btn btn-success" href="#new_room_modal" data-toggle="modal">Создать комнату</a>
+            <a class="btn btn-primary" href="#enter_room_modal" data-toggle="modal">Присоединиться</a>
+        </div>
+        <div class="container">
+            <table class="table table-condensed table-hover" id="all_rooms">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody class="rowlink" data-link="row">
+                {% for room in room_list reversed %}
+                    <tr>
+                        <td><a href="{% url 'party:room' room.pk %}"></a>{{ room.pk }}</td>
+                        <td>{{ room.description }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'bower_components/jasny-bootstrap/js/rowlink.js' %}"></script>
+    <script>
+        $('tbody.rowlink').rowlink()
+    </script>
+    <script src="{% static 'js/new_room.js' %}"></script>
+    <script src="{% static 'js/join_room.js' %}"></script>
+{% endblock %}

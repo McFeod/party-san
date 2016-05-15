@@ -1,0 +1,31 @@
+{% extends 'party_rooms/fragment/modal_base.html' %}
+{% block modal_id %}new_time_modal{% endblock %}
+
+{% block modal_title %}
+    Предложить время
+{% endblock %}
+
+{% block modal_content %}
+    <form action="{% url 'party:add_time' room.pk %}" method="post" id="new_time_form">
+        {% csrf_token %}
+        <p></p>
+        <div class="form-group">
+            <div class='input-group date' id='dtpicker'>
+                <input type='text' class="form-control" name="time" placeholder="Выберите время"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="time_desc">Комментарий:</label>
+            <textarea id="time_desc" name="description" class="form_description"></textarea>
+        </div>
+
+    </form>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    <button type="button" class="btn btn-primary" onclick="add_from_modal('#new_time_form', empty_time)">Сохранить изменения</button>
+{% endblock %}
